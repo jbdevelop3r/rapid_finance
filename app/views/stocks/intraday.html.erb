@@ -1,0 +1,16 @@
+<!-- app/views/stocks/intraday.html.erb -->
+<h1>Intraday Stock Data</h1>
+
+<%= form_with url: intraday_stocks_path, method: :get, local: true do |form| %>
+  <%= form.label :symbol, "Enter stock symbol (e.g., MSFT)" %>
+  <%= form.text_field :symbol, required: true %>
+  <%= form.submit "Search Stock" %>
+<% end %>
+
+<% if @latest_open_value %>
+  <h2>Latest Open Value:</h2>
+  <p>Symbol: <%= params[:symbol] %></p>
+  <p>Stock Price: <%= @latest_open_value %></p>
+<% elsif @intraday_data.is_a?(Hash) && @intraday_data["error"] %>
+  <p style="color: red;">Error: <%= @intraday_data["error"] %></p>
+<% end %>
