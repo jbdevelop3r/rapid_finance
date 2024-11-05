@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "stocks#intraday"
-  resources :stocks, only: [] do
+  resources :stocks, only: [:create] do
     collection do
       get :search
       get :intraday

@@ -8,6 +8,11 @@
 <% end %>
 <p><%= link_to 'Regenerate Stocks', intraday_stocks_path  %></p>
 
-<% if @latest_open_value %>
-  <p>Stock Price: <%= @latest_open_value %></p>
+<% if @intraday_data.present? %>
+  <h2>Stock Symbol: <%= params[:symbol] %></h2>
+  <p>Latest Open Price: <%= @latest_open_value %></p>
+
+  <%= button_to 'Buy Stock', stocks_path, method: :post, params: { stock: { symbol: params[:symbol], price: @latest_open_value, quantity: 1 } }%>
+<% else %>
+  <p>No intraday data found. Please provide a valid stock symbol.</p>
 <% end %>
